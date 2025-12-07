@@ -1,0 +1,68 @@
+
+
+@import "tailwindcss";
+
+
+:root {
+  --primary: #4F46E5;
+  --primary-hover: #4338CA;
+
+  --secondary: #10B981;
+  --secondary-hover: #059669;
+
+  --bg: #F8F9FC; 
+  --card-bg: #FFFFFF;
+
+  --text-primary: #0F172A;    
+  --text-secondary: #475569; 
+
+  --border: #CBD5E1;          
+  --hover-bg: #E2E8F0;       
+
+  --focus: #2563EB;
+}
+
+
+.dark {
+  --primary: #818CF8;
+  --primary-hover: #6366F1;
+
+  --secondary: #34D399;
+  --secondary-hover: #10B981;
+
+  --bg: #0F172A;
+  --card-bg: #1E293B;
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+
+  --border: #334155;
+  --hover-bg: #334155;
+
+  --focus: #3B82F6;
+}
+
+
+body {
+  background-color: var(--bg);
+  color: var(--text-primary);
+}
+
+
+.btn-primary {
+  @apply px-4 py-2 rounded font-semibold transition-colors;
+  background-color: var(--primary);
+  color: #ffffff !important;
+}
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-secondary {
+  @apply px-4 py-2 rounded font-semibold transition-colors;
+  background-color: var(--secondary);
+  color: #ffffff !important;
+}
+.btn-secondary:hover {
+  background-color: var(--secondary-hover);
+}
