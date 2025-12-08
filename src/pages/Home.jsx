@@ -12,7 +12,7 @@ import LearningResources from "../components/LearningResources";
 
 const Home = () => {
   return (
-    <div className="min-h-screen  bg-[var(--bg)] text-[var(--text-primary)]">
+    <div className="min-h-screen  w-full max-w-[1600px] bg-[var(--bg)] text-[var(--text-primary)]">
       <Hero />
       <OnlineTutors />
       <LatestTuitions />
