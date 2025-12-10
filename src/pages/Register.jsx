@@ -123,7 +123,7 @@ const Register = () => {
           <div>
             <label className="block text-sm mb-1">Role</label>
             <div className="flex gap-3 items-center">
-              {["student", "tutor", "guardian"].map((role) => (
+              {["student", "teacher", "guardian"].map((role) => (
                 <label key={role} className="flex items-center gap-2">
                   <input type="radio" value={role} {...register("role")} defaultChecked={role === "student"} />
                   <span>{role.charAt(0).toUpperCase() + role.slice(1)}</span>

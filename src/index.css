@@ -1,68 +1,353 @@
-
-
+/* globals.css */
 @import "tailwindcss";
 
-
+/* CSS Variables for Light/Dark Mode */
 :root {
   --primary: #4F46E5;
   --primary-hover: #4338CA;
+  --primary-light: #EEF2FF;
+  --primary-dark: #3730A3;
 
   --secondary: #10B981;
   --secondary-hover: #059669;
+  --secondary-light: #D1FAE5;
+  --secondary-dark: #065F46;
 
-  --bg: #F8F9FC; 
+  --success: #10B981;
+  --warning: #F59E0B;
+  --error: #EF4444;
+  --info: #3B82F6;
+
+  --bg: #F8F9FC;
   --card-bg: #FFFFFF;
+  --sidebar-bg: #FFFFFF;
 
-  --text-primary: #0F172A;    
-  --text-secondary: #475569; 
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #64748B;
 
-  --border: #CBD5E1;          
-  --hover-bg: #E2E8F0;       
+  --border: #CBD5E1;
+  --border-light: #E2E8F0;
+  --border-dark: #CBD5E1;
+
+  --hover-bg: #E2E8F0;
+  --hover-card: #F1F5F9;
+
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
 
   --focus: #2563EB;
 }
 
-
 .dark {
   --primary: #818CF8;
   --primary-hover: #6366F1;
+  --primary-light: #3730A3;
+  --primary-dark: #312E81;
 
   --secondary: #34D399;
   --secondary-hover: #10B981;
+  --secondary-light: #065F46;
+  --secondary-dark: #064E3B;
+
+  --success: #34D399;
+  --warning: #FBBF24;
+  --error: #F87171;
+  --info: #60A5FA;
 
   --bg: #0F172A;
   --card-bg: #1E293B;
+  --sidebar-bg: #1E293B;
 
   --text-primary: #F1F5F9;
   --text-secondary: #94A3B8;
+  --text-muted: #64748B;
 
   --border: #334155;
+  --border-light: #475569;
+  --border-dark: #334155;
+
   --hover-bg: #334155;
+  --hover-card: #1E293B;
+
+  --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.3);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3);
+  --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
 
   --focus: #3B82F6;
 }
 
-
+/* Apply CSS Variables globally */
 body {
   background-color: var(--bg);
   color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Custom utility classes - In Tailwind v4, you define them directly */
+.bg-bg { background-color: var(--bg); }
+.bg-card-bg { background-color: var(--card-bg); }
+.bg-hover-bg { background-color: var(--hover-bg); }
+.bg-primary-light { background-color: var(--primary-light); }
+.bg-secondary-light { background-color: var(--secondary-light); }
 
+.text-text-primary { color: var(--text-primary); }
+.text-text-secondary { color: var(--text-secondary); }
+.text-primary { color: var(--primary); }
+.text-secondary { color: var(--secondary); }
+.text-success { color: var(--success); }
+.text-warning { color: var(--warning); }
+.text-error { color: var(--error); }
+
+.border-border { border-color: var(--border); }
+.border-primary { border-color: var(--primary); }
+.border-secondary { border-color: var(--secondary); }
+
+/* Button Styles */
 .btn-primary {
-  @apply px-4 py-2 rounded font-semibold transition-colors;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
   background-color: var(--primary);
   color: #ffffff !important;
+  cursor: pointer;
 }
+
 .btn-primary:hover {
   background-color: var(--primary-hover);
 }
 
 .btn-secondary {
-  @apply px-4 py-2 rounded font-semibold transition-colors;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
   background-color: var(--secondary);
   color: #ffffff !important;
+  cursor: pointer;
 }
+
 .btn-secondary:hover {
   background-color: var(--secondary-hover);
+}
+
+.btn-outline {
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 600;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  cursor: pointer;
+}
+
+.btn-outline:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Card Styles */
+.card {
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+  background-color: var(--card-bg);
+  cursor: pointer;
+}
+
+/* Form Styles */
+.form-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  border: 1px solid var(--border);
+  transition-property: border-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--focus);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  color: var(--text-primary);
+}
+
+/* Status Badges */
+.status-badge-active {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.status-badge-pending {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(245, 158, 11, 0.1);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.status-badge-suspended {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.status-badge-default {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--hover-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Role Badges */
+.role-badge-tutor {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(79, 70, 229, 0.1);
+  color: var(--primary);
+  border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.role-badge-student {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(16, 185, 129, 0.1);
+  color: var(--secondary);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.role-badge-guardian {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(168, 85, 247, 0.1);
+  color: #A855F7;
+  border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.role-badge-admin {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: rgba(239, 68, 68, 0.1);
+  color: var(--error);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.role-badge-default {
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  background-color: var(--hover-bg);
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  transition-property: background-color;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  background-color: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+}
+
+.theme-toggle:hover {
+  background-color: var(--hover-bg);
+}
+
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Selection Styles */
+::selection {
+  background-color: var(--primary);
+  color: white;
+}
+
+/* Focus Styles */
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Animation Classes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
 }

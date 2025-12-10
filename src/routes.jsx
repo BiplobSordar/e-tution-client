@@ -41,6 +41,9 @@ import G2 from "./pages/guardian/G2";
 import Unauthorized from "./pages/Unauthorized";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
+import ProfilePage from "./pages/Profile/Profile";
+
+// import ProfilePage from "./pages/Profile";
 
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
@@ -77,6 +80,7 @@ export const router = createBrowserRouter([
       { path: "unauthorized", element: <Unauthorized/> },
       { path: "forgot-password", element: <ForgotPassword/> },
       { path: "reset-password", element: <ResetPassword/> },
+      { path: "profile", element: <ProtectedRoute allowedRoles={['teacher','student','admin' ,'guardian']}><ProfilePage/></ProtectedRoute>},
 
 
       {
@@ -120,6 +124,7 @@ export const router = createBrowserRouter([
           { index: true, element: <StudentDashboard /> },
           { path: "s1", element: <S1 /> },
           { path: "s2", element: <S2 /> },
+       
         ],
       },
 
