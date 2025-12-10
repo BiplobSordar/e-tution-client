@@ -33,3 +33,12 @@ batches, attendance, and payments.
   <li>Online fee payment</li>
   <li>Notifications and alerts</li>
 </ul>
+
+
+
+<h2>Profile Page Inplementation done </h2>
+<ul>
+  <li> Admin, Teacher, and Student all user seee their own profile</li>
+  <li>upldate profile</li>
+  <li>Upload Avatar image to cloudanary</li>
+</ul>
