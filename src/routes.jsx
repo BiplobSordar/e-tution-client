@@ -47,7 +47,6 @@ import AppliedTutors from "./pages/student/AppliedTutors";
 import PostTution from "./pages/student/PostTution";
 import MyTutions from "./pages/student/MyTutions";
 
-// import ProfilePage from "./pages/Profile";
 
 
 const ProtectedRoute = ({ children, allowedRoles }) => {

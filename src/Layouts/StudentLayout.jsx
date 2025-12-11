@@ -1,9 +1,3 @@
-
-
-
-
-
-
 import {
   LuLayoutDashboard,
   LuBookOpen,
@@ -12,9 +6,6 @@ import {
   LuCreditCard,
   LuPlus       
 } from "react-icons/lu";
-
-
-
 
 
 import React, { useState, useEffect } from "react";
