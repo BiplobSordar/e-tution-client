@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaMapMarkerAlt, FaBook, FaMoneyBill, FaClock } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const TuitionCard = ({ tution }) => {
   const [showFull, setShowFull] = useState(false);
@@ -107,6 +108,7 @@ const TuitionCard = ({ tution }) => {
    
       <div className="mt-4">
         {tution.alreadyApplied ? (
+          <Link to={`/tutions/${tution._id}`}>
           <button
             className="
               w-full py-2 rounded-lg 
@@ -116,10 +118,13 @@ const TuitionCard = ({ tution }) => {
           >
             Already Applied
           </button>
+          </Link>
         ) : (
+           <Link to={`/tutions/${tution._id}`}>
           <button className="btn-primary w-full">
             Apply Now
           </button>
+          </Link>
         )}
       </div>
     </div>
