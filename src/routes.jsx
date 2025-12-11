@@ -42,6 +42,10 @@ import Unauthorized from "./pages/Unauthorized";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
 import ProfilePage from "./pages/Profile/Profile";
+import Payments from "./pages/student/Payments";
+import AppliedTutors from "./pages/student/AppliedTutors";
+import PostTution from "./pages/student/PostTution";
+import MyTutions from "./pages/student/MyTutions";
 
 // import ProfilePage from "./pages/Profile";
 
@@ -77,10 +81,10 @@ export const router = createBrowserRouter([
       { path: "login", element: <PublicRoute><Login /></PublicRoute> },
       { path: "register", element: <PublicRoute><Register /></PublicRoute> },
       { path: "*", element: <NotFound /> },
-      { path: "unauthorized", element: <Unauthorized/> },
-      { path: "forgot-password", element: <ForgotPassword/> },
-      { path: "reset-password", element: <ResetPassword/> },
-      { path: "profile", element: <ProtectedRoute allowedRoles={['teacher','student','admin' ,'guardian']}><ProfilePage/></ProtectedRoute>},
+      { path: "unauthorized", element: <Unauthorized /> },
+      { path: "forgot-password", element: <ForgotPassword /> },
+      { path: "reset-password", element: <ResetPassword /> },
+      { path: "profile", element: <ProtectedRoute allowedRoles={['teacher', 'student', 'admin', 'guardian']}><ProfilePage /></ProtectedRoute> },
 
 
       {
@@ -92,8 +96,7 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <TeacherDashboard /> },
-          { path: "t1", element: <T1 /> },
-          { path: "t2", element: <T2 /> },
+
         ],
       },
 
@@ -121,10 +124,14 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
+          // Default route when /student is accessed
           { index: true, element: <StudentDashboard /> },
-          { path: "s1", element: <S1 /> },
-          { path: "s2", element: <S2 /> },
-       
+
+          // Other nested routes
+          { path: "my-tution", element: <MyTutions /> },
+          { path: "post-tuition", element: <PostTution /> },
+          { path: "applied-tutors", element: <AppliedTutors /> },
+          { path: "payments", element: <Payments /> },
         ],
       },
 
