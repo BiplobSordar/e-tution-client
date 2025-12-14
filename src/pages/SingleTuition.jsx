@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, } from "react-router-dom";
 import {
   useApplyTuitionMutation,
   useGetTuitionQuery,
@@ -43,49 +43,49 @@ const SingleTuition = () => {
   };
 
 
-if (isLoading) {
-  return (
-    <div className="max-w-5xl mx-auto py-8 px-4 space-y-8">
-
- 
-      <div className="space-y-2">
-        <div className="skeleton h-10 w-2/3"></div>
-        <div className="skeleton h-4 w-1/4"></div>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="skeleton h-20 w-full rounded-xl"></div>
-        <div className="skeleton h-20 w-full rounded-xl"></div>
-        <div className="skeleton h-20 w-full rounded-xl"></div>
-      </div>
+  if (isLoading) {
+    return (
+      <div className="max-w-5xl mx-auto py-8 px-4 space-y-8">
 
 
-      <div className="space-y-3">
-        <div className="skeleton h-5 w-1/2"></div>
-        <div className="skeleton h-4 w-full"></div>
-        <div className="skeleton h-4 w-11/12"></div>
-        <div className="skeleton h-4 w-3/4"></div>
-      </div>
-
-
-      <div className="rounded-xl border p-6 space-y-4">
-        <div className="skeleton h-6 w-1/3"></div>
         <div className="space-y-2">
+          <div className="skeleton h-10 w-2/3"></div>
+          <div className="skeleton h-4 w-1/4"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="skeleton h-20 w-full rounded-xl"></div>
+          <div className="skeleton h-20 w-full rounded-xl"></div>
+          <div className="skeleton h-20 w-full rounded-xl"></div>
+        </div>
+
+
+        <div className="space-y-3">
+          <div className="skeleton h-5 w-1/2"></div>
           <div className="skeleton h-4 w-full"></div>
-          <div className="skeleton h-4 w-5/6"></div>
-          <div className="skeleton h-4 w-4/6"></div>
+          <div className="skeleton h-4 w-11/12"></div>
+          <div className="skeleton h-4 w-3/4"></div>
+        </div>
+
+
+        <div className="rounded-xl border p-6 space-y-4">
+          <div className="skeleton h-6 w-1/3"></div>
+          <div className="space-y-2">
+            <div className="skeleton h-4 w-full"></div>
+            <div className="skeleton h-4 w-5/6"></div>
+            <div className="skeleton h-4 w-4/6"></div>
+          </div>
+        </div>
+
+        <div className="skeleton h-56 w-full rounded-xl"></div>
+
+        <div className="flex gap-4">
+          <div className="skeleton h-10 w-32 rounded-lg"></div>
+          <div className="skeleton h-10 w-32 rounded-lg"></div>
         </div>
       </div>
-
-      <div className="skeleton h-56 w-full rounded-xl"></div>
-
-      <div className="flex gap-4">
-        <div className="skeleton h-10 w-32 rounded-lg"></div>
-        <div className="skeleton h-10 w-32 rounded-lg"></div>
-      </div>
-    </div>
-  );
-}
+    );
+  }
 
   if (!tuition) {
     return (
@@ -106,14 +106,16 @@ if (isLoading) {
     );
   }
 
+
+
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 space-y-10">
 
 
       <div className="space-y-3 w-full">
-       <h1 className="text-xl font-semibold whitespace-normal break-words">
-  {tuition.title}
-</h1>
+        <h1 className="text-xl font-semibold whitespace-normal break-words">
+          {tuition.title}
+        </h1>
 
         <div className="flex flex-wrap gap-3 items-center">
           <span className="status-badge-active">{tuition.status.toUpperCase()}</span>
@@ -138,10 +140,10 @@ if (isLoading) {
 
       <p className="text-text-secondary leading-relaxed">{tuition.description}</p>
 
- 
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
-     
+
         <div className="card p-4">
           <div className="flex items-center gap-3 mb-2 text-text-secondary">
             <FaMoneyBill /> Total Fee
@@ -167,14 +169,15 @@ if (isLoading) {
         </div>
       </div>
 
-
-      <div className="card p-4">
-        <h3 className="text-text-primary font-semibold mb-2 flex items-center gap-2">
-          <FaUser /> Posted By
-        </h3>
-        <p className="text-text-primary">{tuition.postedBy?.name}</p>
-        <p className="text-text-secondary text-sm">{tuition.postedBy?.email}</p>
-      </div>
+      <Link className="text-blue-600" to={`/public/${tuition.postedBy?.id}`}>
+        <div className="card p-4">
+          <h3 className="text-text-primary font-semibold mb-2 flex items-center gap-2">
+            <FaUser /> Posted By
+          </h3>
+          <p className="text-text-primary">{tuition.postedBy?.name}</p>
+          <p className="text-text-secondary text-sm">{tuition.postedBy?.email}</p>
+        </div>
+      </Link>
 
 
       <div>
@@ -199,7 +202,9 @@ if (isLoading) {
               <div key={idx} className="card p-4">
                 <p className="text-sm text-text-secondary">
                   Proposed By:{" "}
-                  <span className="font-medium">{proposal.proposedBy}</span>
+
+                  <span className="font-medium">{proposal?.role}</span>
+
                 </p>
 
                 <div className="mt-2 space-y-1">

@@ -47,6 +47,7 @@ import AppliedTutors from "./pages/student/AppliedTutors";
 import PostTution from "./pages/student/PostTution";
 import MyTutions from "./pages/student/MyTutions";
 import SingleTuition from "./pages/SingleTuition";
+import PublicProfilePage from "./pages/PublicProfilePage";
 
 
 
@@ -85,6 +86,7 @@ export const router = createBrowserRouter([
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
       { path: "tutions/:id", element: <SingleTuition/>},
+      { path: "public/:userId", element: <PublicProfilePage/>},
       { path: "profile", element: <ProtectedRoute allowedRoles={['teacher', 'student', 'admin', 'guardian']}><ProfilePage /></ProtectedRoute> },
 
 

@@ -22,7 +22,7 @@ const OverviewTab = ({ user }) => {
         
         <div className="space-y-4">
      
-          {user.role === 'tutor' && user.tutorProfile && (
+          {user.role === 'teacher' && user.tutorProfile && (
             <TutorOverview tutorProfile={user.tutorProfile} />
           )}
           

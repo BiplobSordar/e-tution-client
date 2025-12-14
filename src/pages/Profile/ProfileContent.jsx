@@ -15,7 +15,7 @@ const ProfileContent = ({ user, activeTab }) => {
         return <ProfileTab user={user} />;
       case 'details':
         return <DetailsTab user={user} />;
-      case 'teacher':
+      case 'tutor':
         return user.role === 'teacher' ? <TutorTab user={user} /> : null;
       case 'student':
         return user.role === 'student' ? <StudentTab user={user} /> : null;

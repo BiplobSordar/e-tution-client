@@ -6,6 +6,7 @@ import {
 import { getDayName } from '../profileHelpers';
 
 const TutorTab = ({ user }) => {
+  console.log('i am colling form tutor tab')
   return (
     <div className="space-y-6">
 

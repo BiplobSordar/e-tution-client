@@ -30,6 +30,10 @@ export const userApi = createApi({
         body: { avatarBase64 },
       }),
     }),
+    getUserProfileById: builder.query({
+      query: (userId) => `/api/users/public/${userId}`,
+      providesTags: (result, error, userId) => [{ type: "User", userId }],
+    }),
   }),
 });
 
@@ -37,5 +41,6 @@ export const {
  
  useUpdateMyProfileMutation,
   useGetMyProfileQuery,
-  useUploadAvatarMutation
+  useUploadAvatarMutation,
+  useGetUserProfileByIdQuery
 } = userApi;
