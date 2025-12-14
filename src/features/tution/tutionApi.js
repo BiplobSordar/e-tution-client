@@ -30,7 +30,7 @@ export const tutionApi = createApi({
         return {
           url: "/api/tutions",
           method: "GET",
-          params, 
+          params,
         };
       },
       providesTags: ["Tuitions"]
@@ -41,12 +41,21 @@ export const tutionApi = createApi({
       query: (id) => `/api/tutions/${id}`,
       providesTags: (result, error, id) => [{ type: "Tuition", id }],
     }),
-    applyTuition: builder.mutation({
-      query: (id) => ({
-        url: `/api/tutions/${id}/apply`,
-        method: "POST",
+    checkApplicationStatus: builder.query({
+      query: (tuitionId) => `/api/tutions/applications/check/${tuitionId}`,
+      providesTags: ['Application'],
+    }),
+    applyForTuition: builder.mutation({
+      query: ({ tuitionId, ...data }) => ({
+        url: `/api/tutions/${tuitionId}/apply`,
+        method: 'POST',
+        body: data,
       }),
-      invalidatesTags: (result, error, id) => [{ type: "Tuition", id }],
+      invalidatesTags: (result, error, { tuitionId }) => [
+        { type: 'Tuition', id: tuitionId },
+        'Application'
+      ],
+      transformResponse: (response) => response.data || response,
     }),
     getRecommendedTuitions: builder.query({
       query: ({ page = 1, limit = 10, city, grade, subject, tuitionType }) => {
@@ -62,7 +71,7 @@ export const tutionApi = createApi({
         return {
           url: "/api/tutions/recommended",
           method: "GET",
-          params, 
+          params,
         };
       },
       providesTags: ["Tuitions"],
@@ -71,4 +80,4 @@ export const tutionApi = createApi({
   }),
 });
 
-export const { useGetTuitionsQuery, useCreateTuitionMutation, useGetTuitionQuery, useApplyTuitionMutation, useGetRecommendedTuitionsQuery } = tutionApi;
+export const { useGetTuitionsQuery, useCreateTuitionMutation, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;

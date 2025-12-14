@@ -1,7 +1,7 @@
 import React from "react";
-import { useParams, Link, } from "react-router-dom";
+import { useParams, Link, useNavigate, } from "react-router-dom";
 import {
-  useApplyTuitionMutation,
+ 
   useGetTuitionQuery,
   useGetRecommendedTuitionsQuery
 } from "../features/tution/tutionApi";
@@ -12,10 +12,11 @@ import { useSelector } from "react-redux";
 
 const SingleTuition = () => {
   const { id } = useParams();
+  const navigate=useNavigate()
   const { user } = useSelector((state) => state.auth);
 
   const { data: tuition, isLoading } = useGetTuitionQuery(id);
-  const [applyTuition, { isLoading: isApplying }] = useApplyTuitionMutation();
+  
 
   const { data: recommendedTuitions } = useGetRecommendedTuitionsQuery(
     {
@@ -34,12 +35,7 @@ const SingleTuition = () => {
       toast.error("Only teachers can apply");
       return;
     }
-    try {
-      await applyTuition(id).unwrap();
-      toast.success("Applied successfully!");
-    } catch (err) {
-      toast.error(err?.data?.message || "Failed to apply");
-    }
+   navigate(`/apply-tution/${tuition?._id}`)
   };
 
 
@@ -130,9 +126,9 @@ const SingleTuition = () => {
           <button
             className="btn-primary"
             onClick={handleApply}
-            disabled={isApplying}
+           
           >
-            {isApplying ? "Applying..." : "Apply Now"}
+          Apply Now
           </button>
         )}
       </div>

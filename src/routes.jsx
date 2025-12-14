@@ -48,6 +48,7 @@ import PostTution from "./pages/student/PostTution";
 import MyTutions from "./pages/student/MyTutions";
 import SingleTuition from "./pages/SingleTuition";
 import PublicProfilePage from "./pages/PublicProfilePage";
+import TuitionApplicationPage from "./pages/ApplyTution";
 
 
 
@@ -88,6 +89,7 @@ export const router = createBrowserRouter([
       { path: "tutions/:id", element: <SingleTuition/>},
       { path: "public/:userId", element: <PublicProfilePage/>},
       { path: "profile", element: <ProtectedRoute allowedRoles={['teacher', 'student', 'admin', 'guardian']}><ProfilePage /></ProtectedRoute> },
+      { path: "apply-tution/:tuitionId", element: <ProtectedRoute allowedRoles={['teacher']}><TuitionApplicationPage/></ProtectedRoute> },
 
 
       {
