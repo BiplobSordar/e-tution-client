@@ -41,6 +41,10 @@ export const tutionApi = createApi({
       query: (id) => `/api/tutions/${id}`,
       providesTags: (result, error, id) => [{ type: "Tuition", id }],
     }),
+    getMyTuitions: builder.query({
+      query: () => '/api/tutions/my-tutions',
+      providesTags: ['Tuition'],
+    }),
     checkApplicationStatus: builder.query({
       query: (tuitionId) => `/api/tutions/applications/check/${tuitionId}`,
       providesTags: ['Application'],
@@ -76,8 +80,24 @@ export const tutionApi = createApi({
       },
       providesTags: ["Tuitions"],
     }),
+    createCheckoutSession: builder.mutation({
+      query: ({ tuitionId, tutorId }) => ({
+        url: `/api/tutions/payments/create-checkout-session`,
+        method: 'POST',
+        body: { tuitionId, tutorId },
+      }),
 
+    }),
+    rejectTutor: builder.mutation({
+      query: ({ tuitionId, tutorId }) => ({
+        url: `/api/tutions/reject-tution`,
+        method: 'POST',
+        body: { tuitionId, tutorId },
+      }),
+      
+
+    }),
   }),
 });
 
-export const { useGetTuitionsQuery, useCreateTuitionMutation, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;
+export const { useGetTuitionsQuery, useCreateTuitionMutation, useCreateCheckoutSessionMutation, useRejectTutorMutation,useGetMyTuitionsQuery, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;

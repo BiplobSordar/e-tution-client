@@ -49,6 +49,8 @@ import MyTutions from "./pages/student/MyTutions";
 import SingleTuition from "./pages/SingleTuition";
 import PublicProfilePage from "./pages/PublicProfilePage";
 import TuitionApplicationPage from "./pages/ApplyTution";
+import PaymentSuccess from "./pages/PaymentSuccess";
+import PaymentCancel from "./pages/PaymentCancel";
 
 
 
@@ -86,10 +88,12 @@ export const router = createBrowserRouter([
       { path: "unauthorized", element: <Unauthorized /> },
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
-      { path: "tutions/:id", element: <SingleTuition/>},
-      { path: "public/:userId", element: <PublicProfilePage/>},
+      { path: "tutions/:id", element: <SingleTuition /> },
+      { path: "public/:userId", element: <PublicProfilePage /> },
       { path: "profile", element: <ProtectedRoute allowedRoles={['teacher', 'student', 'admin', 'guardian']}><ProfilePage /></ProtectedRoute> },
-      { path: "apply-tution/:tuitionId", element: <ProtectedRoute allowedRoles={['teacher']}><TuitionApplicationPage/></ProtectedRoute> },
+      { path: "apply-tution/:tuitionId", element: <ProtectedRoute allowedRoles={['teacher']}><TuitionApplicationPage /></ProtectedRoute> },
+      { path: "payment-success", element: <ProtectedRoute allowedRoles={['student']}><PaymentSuccess /></ProtectedRoute> },
+      { path: "payment-cancle", element: <ProtectedRoute allowedRoles={['student']}><PaymentCancel /></ProtectedRoute> },
 
 
       {
@@ -133,7 +137,7 @@ export const router = createBrowserRouter([
           { index: true, element: <StudentDashboard /> },
 
           // Other nested routes
-          { path: "my-tution", element: <MyTutions /> },
+          { path: "my-tutions", element: <MyTutions /> },
           { path: "post-tuition", element: <PostTution /> },
           { path: "applied-tutors", element: <AppliedTutors /> },
           { path: "payments", element: <Payments /> },
