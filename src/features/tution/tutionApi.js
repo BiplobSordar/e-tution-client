@@ -94,10 +94,13 @@ export const tutionApi = createApi({
         method: 'POST',
         body: { tuitionId, tutorId },
       }),
-      
 
+
+    }),
+    getPaidTuitions: builder.query({
+      query: () => '/api/tutions/paid-with-payment',
     }),
   }),
 });
 
-export const { useGetTuitionsQuery, useCreateTuitionMutation, useCreateCheckoutSessionMutation, useRejectTutorMutation,useGetMyTuitionsQuery, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;
+export const { useGetTuitionsQuery, useCreateTuitionMutation, useGetPaidTuitionsQuery, useCreateCheckoutSessionMutation, useRejectTutorMutation, useGetMyTuitionsQuery, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;

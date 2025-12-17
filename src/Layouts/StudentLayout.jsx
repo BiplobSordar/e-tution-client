@@ -12,6 +12,7 @@ import React, { useState, useEffect } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { LuMenu, LuX } from "react-icons/lu";
+import { useSelector } from "react-redux";
 
 const sidebarWidth = "280px";
 
@@ -19,6 +20,7 @@ const StudentLayout = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
+  const {user}=useSelector((state)=>state.auth)
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -53,11 +55,7 @@ const navLinks = [
     label: "Payments",
     icon: <LuCreditCard />,
   },
-  {
-    path: "/student/profile",
-    label: "Profile Settings",
-    icon: <LuUser />,
-  },
+ 
 ];
 
   useEffect(() => {
@@ -105,8 +103,8 @@ const navLinks = [
               JD
             </div>
             <div>
-              <p className="font-medium">John Doe</p>
-              <p className="text-xs text-[var(--text-secondary)]">Student</p>
+              <p className="font-medium">{user?.name}</p>
+              <p className="text-xs text-[var(--text-secondary)]">{user?.role}</p>
             </div>
           </div>
         </div>

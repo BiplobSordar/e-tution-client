@@ -125,7 +125,7 @@ const TuitionCard = ({ tuition, hasRealData }) => {
       )}
 
    
-      <div className="pt-4 border-t border-border flex-between">
+      <div className="pt-4 flex-col lg:flex-row border-t border-border flex-between gap-2 lg:gap-0">
         <div className="flex items-center gap-4">
           <span className="text-sm text-text-secondary">
             {applicationsCount} applications
