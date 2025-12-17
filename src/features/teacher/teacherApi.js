@@ -25,10 +25,40 @@ export const teacherApi = createApi({
       },
       providesTags: ["Teacher"],
     }),
+    getMyApplications: builder.query({
+      query: () => ({
+        url: "/api/teachers/my-applications",
+        method: "GET",
+      }),
+      providesTags: ["MyApplications"],
+    }),
 
-   
+    updateMyApplication: builder.mutation({
+  query: ({ tuitionId, data }) => ({
+    url: `/api/teachers/applications/${tuitionId}`,
+    method: "PATCH",
+    body: data,
+  }),
+}),
+
+withdrawMyApplication: builder.mutation({
+  query: (tuitionId) => ({
+    url: `/api/teachers/applications/${tuitionId}`,
+    method: "DELETE",
+  }),
+}),
+ getMyOngoingTuitions: builder.query({
+      query: () => ({
+        url: "/api/teachers/ongoing-tuitions",
+        method: "GET",
+      }),
+      providesTags: ["OngoingTuitions"],
+    }),
+
+
 
   }),
 });
 
-export const {useGetTeachersQuery } =teacherApi;
+export const { useGetTeachersQuery,useGetMyApplicationsQuery ,  useGetMyOngoingTuitionsQuery,useUpdateMyApplicationMutation,
+  useWithdrawMyApplicationMutation,} = teacherApi;

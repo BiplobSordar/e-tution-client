@@ -51,6 +51,10 @@ import PublicProfilePage from "./pages/PublicProfilePage";
 import TuitionApplicationPage from "./pages/ApplyTution";
 import PaymentSuccess from "./pages/PaymentSuccess";
 import PaymentCancel from "./pages/PaymentCancel";
+import MyApplications from "./pages/teacher/MyApplications";
+import OngoingTuitions from "./pages/teacher/OngoingTuitions";
+import RevenueHistory from "./pages/teacher/RevenueHistory";
+
 
 
 
@@ -105,6 +109,9 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <TeacherDashboard /> },
+          { path:'my-applications', element:<MyApplications/> },
+          { path:'my-tuitions', element:<OngoingTuitions/> },
+          { path:'payment-history', element:<RevenueHistory/> },
 
         ],
       },

@@ -4,24 +4,44 @@ const Unauthorized = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-4xl font-bold text-red-600 mb-4">403</h1>
-      <h2 className="text-2xl font-semibold mb-2">Unauthorized Access</h2>
-      <p className="text-gray-700 mb-6">
-        You do not have permission to view this page.
-      </p>
-      <button
-        onClick={() => navigate(-1)} 
-        className="px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
-      >
-        Go Back
-      </button>
-      <button
-        onClick={() => navigate("/")}
-        className="mt-4 px-6 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition"
-      >
-        Go Home
-      </button>
+    <div className="min-h-screen flex-center bg-bg px-4">
+      <div className="card w-full max-w-md text-center animate-fade-in">
+      
+        <div className="text-error text-6xl font-extrabold mb-2">
+          403
+        </div>
+
+        <h1 className="text-2xl font-semibold text-text-primary mb-2">
+          Unauthorized Access
+        </h1>
+
+
+        <p className="text-text-secondary mb-6">
+          You don’t have permission to view this page.  
+          Please contact an administrator or go back.
+        </p>
+
+
+        <div className="flex gap-3 justify-center stack-mobile">
+          <button
+            onClick={() => navigate(-1)}
+            className="btn-outline full-width-mobile"
+          >
+            Go Back
+          </button>
+
+          <button
+            onClick={() => navigate("/")}
+            className="btn-primary full-width-mobile"
+          >
+            Go Home
+          </button>
+        </div>
+
+        <div className="mt-6 border-t border-border pt-4 text-sm text-text-muted">
+          Error Code: <span className="font-medium">403</span>
+        </div>
+      </div>
     </div>
   );
 };
