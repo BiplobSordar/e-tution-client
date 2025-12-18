@@ -26,8 +26,8 @@ import T2 from "./pages/teacher/T2";
 
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
-import A1 from "./pages/admin/A1";
-import A2 from "./pages/admin/A2";
+
+
 
 
 import StudentDashboard from "./pages/student/StudendDashboard";
@@ -54,6 +54,9 @@ import PaymentCancel from "./pages/PaymentCancel";
 import MyApplications from "./pages/teacher/MyApplications";
 import OngoingTuitions from "./pages/teacher/OngoingTuitions";
 import RevenueHistory from "./pages/teacher/RevenueHistory";
+import UserManagement from "./pages/admin/UserManagement";
+import TuitionManagement from "./pages/admin/TuitionManagement";
+import ReportsAnalytics from "./pages/admin/ReportsAnalytics";
 
 
 
@@ -109,9 +112,9 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <TeacherDashboard /> },
-          { path:'my-applications', element:<MyApplications/> },
-          { path:'my-tuitions', element:<OngoingTuitions/> },
-          { path:'payment-history', element:<RevenueHistory/> },
+          { path: 'my-applications', element: <MyApplications /> },
+          { path: 'my-tuitions', element: <OngoingTuitions /> },
+          { path: 'payment-history', element: <RevenueHistory /> },
 
         ],
       },
@@ -126,8 +129,12 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <AdminDashboard /> },
-          { path: "a1", element: <A1 /> },
-          { path: "a2", element: <A2 /> },
+          { path: "users", element: <UserManagement /> },
+          { path: "tuitions", element: <TuitionManagement /> },
+          {
+            path: "reports",
+            element: <ReportsAnalytics />
+          }
         ],
       },
 
