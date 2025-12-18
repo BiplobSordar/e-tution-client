@@ -94,7 +94,7 @@ const TuitionApplicationPage = () => {
   useEffect(() => {
     if (applySuccess) {
       toast.success('Application submitted successfully!');
-      navigate(`/tuitions/${tuitionId}`);
+      navigate(`/teacher/my-applications`);
       resetApply();
     }
   }, [applySuccess, navigate, tuitionId, resetApply]);

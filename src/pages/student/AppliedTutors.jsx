@@ -182,7 +182,7 @@ const AppliedTutorsPage = () => {
   const [expandedTuition, setExpandedTuition] = useState(null);
   
 
-  const { data, isLoading, error } = useGetMyTuitionsQuery();
+  const { data, isLoading, error,refetch } = useGetMyTuitionsQuery();
   
 
   const tuitions = data?.tuitions?.length > 0 ? data.tuitions :[];
@@ -336,6 +336,7 @@ const AppliedTutorsPage = () => {
                 onToggleExpand={() => toggleTuitionExpansion(tuition._id)}
                 onApplicationClick={handleApplicationClick}
                 hasRealData={hasRealData}
+                refetch={refetch}
               />
             ))}
           </div>

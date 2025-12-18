@@ -8,7 +8,8 @@ const TuitionApplicationsCard = ({
   expanded, 
   onToggleExpand, 
   onApplicationClick,
-  hasRealData 
+  hasRealData ,
+  refetch
 }) => {
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -143,6 +144,7 @@ const TuitionApplicationsCard = ({
                   tuitionId={tuition._id}
                   onClick={() => onApplicationClick(tuition._id, application._id)}
                   hasRealData={hasRealData}
+                  refetch={refetch}
                 />
               ))}
             </div>

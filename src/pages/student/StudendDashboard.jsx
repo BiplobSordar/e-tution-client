@@ -8,8 +8,7 @@ const StudentDashboard = () => {
 
 
   const { data: tuitions, isLoading } = useGetMyTuitionsQuery()
-  console.log(tuitions, 'this si the tutions')
-  console.log(studentData, 'this si the tutions')
+
 
   const stats = {
     activeTuitions: tuitions?.tuitions.length,

@@ -15,6 +15,14 @@ export const tutionApi = createApi({
       }),
       invalidatesTags: ["Tuition"],
     }),
+    updateTuition: builder.mutation({
+  query: ({ id, ...data }) => ({
+    url: `/api/tutions/${id}`,
+    method: 'PUT',
+    body: data
+  }),
+  invalidatesTags: ['Tuition', 'Tuitions'],
+}),
 
     getTuitions: builder.query({
       query: ({ page = 1, limit = 10, city, grade, subject, tuitionType }) => {
@@ -100,7 +108,14 @@ export const tutionApi = createApi({
     getPaidTuitions: builder.query({
       query: () => '/api/tutions/paid-with-payment',
     }),
+    deleteTuition: builder.mutation({
+      query: (id) => ({
+        url: `/api/tutions/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Tuition', 'Tuitions'],
+    }),
   }),
 });
 
-export const { useGetTuitionsQuery, useCreateTuitionMutation, useGetPaidTuitionsQuery, useCreateCheckoutSessionMutation, useRejectTutorMutation, useGetMyTuitionsQuery, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;
+export const { useGetTuitionsQuery, useUpdateTuitionMutation,useDeleteTuitionMutation,useCreateTuitionMutation, useGetPaidTuitionsQuery, useCreateCheckoutSessionMutation, useRejectTutorMutation, useGetMyTuitionsQuery, useGetTuitionQuery, useApplyForTuitionMutation, useCheckApplicationStatusQuery, useGetRecommendedTuitionsQuery } = tutionApi;

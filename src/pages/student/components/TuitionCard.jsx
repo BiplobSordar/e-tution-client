@@ -141,7 +141,7 @@ const TuitionCard = ({ tuition, hasRealData }) => {
         <div className="flex gap-2">
           {tuition.status === "open" && tuition.isActive && (
             <Link
-              to={`/tuitions/${tuition._id}/applications`}
+              to={"#"}
               className="btn-primary px-4 py-2 text-sm"
             >
               View Applications
@@ -149,7 +149,7 @@ const TuitionCard = ({ tuition, hasRealData }) => {
           )}
 
           <Link
-            to={`/tuitions/${tuition._id}`}
+            to={`/tutions/${tuition._id}`}
             className="btn-outline px-4 py-2 text-sm"
           >
             View Details

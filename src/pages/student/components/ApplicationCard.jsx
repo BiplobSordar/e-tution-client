@@ -9,11 +9,11 @@ import { useEffect } from "react";
 const ApplicationCard = ({
   application,
   tuitionId,
-
+refetch,
   hasRealData
 }) => {
 
-  const [createCheckoutSession, { isLoading, isSuccess, isError, error, data,refetch  }] = useCreateCheckoutSessionMutation()
+  const [createCheckoutSession, { isLoading, isSuccess, isError, error, data  }] = useCreateCheckoutSessionMutation()
   const [rejectTutor, { isLoading: rejectTutonIsLoading, isSuccess: rejectTutonIsSuccess, isError: rejectTutonIsError, error: rejectTutonError, data: rejectTutonData }] = useRejectTutorMutation()
   const navigate = useNavigate()
   const formatDate = (dateString) => {
