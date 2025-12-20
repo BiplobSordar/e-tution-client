@@ -34,20 +34,20 @@ export const teacherApi = createApi({
     }),
 
     updateMyApplication: builder.mutation({
-  query: ({ tuitionId, data }) => ({
-    url: `/api/teachers/applications/${tuitionId}`,
-    method: "PATCH",
-    body: data,
-  }),
-}),
+      query: ({ tuitionId, data }) => ({
+        url: `/api/teachers/applications/${tuitionId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
 
-withdrawMyApplication: builder.mutation({
-  query: (tuitionId) => ({
-    url: `/api/teachers/applications/${tuitionId}`,
-    method: "DELETE",
-  }),
-}),
- getMyOngoingTuitions: builder.query({
+    withdrawMyApplication: builder.mutation({
+      query: (tuitionId) => ({
+        url: `/api/teachers/applications/${tuitionId}`,
+        method: "DELETE",
+      }),
+    }),
+    getMyOngoingTuitions: builder.query({
       query: () => ({
         url: "/api/teachers/ongoing-tuitions",
         method: "GET",
@@ -60,5 +60,5 @@ withdrawMyApplication: builder.mutation({
   }),
 });
 
-export const { useGetTeachersQuery,useGetMyApplicationsQuery ,  useGetMyOngoingTuitionsQuery,useUpdateMyApplicationMutation,
-  useWithdrawMyApplicationMutation,} = teacherApi;
+export const { useGetTeachersQuery, useGetMyApplicationsQuery, useGetMyOngoingTuitionsQuery, useUpdateMyApplicationMutation,
+  useWithdrawMyApplicationMutation, } = teacherApi;

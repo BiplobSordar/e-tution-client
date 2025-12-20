@@ -10,11 +10,11 @@ import {
 } from "../features/tution/tutionApi";
 import { toast } from "react-hot-toast";
 import TuitionCard from "../components/TuitionCard";
-import { 
-  FaBookOpen, 
-  FaUser, 
-  FaCalendarAlt, 
-  FaMapMarkerAlt, 
+import {
+  FaBookOpen,
+  FaUser,
+  FaCalendarAlt,
+  FaMapMarkerAlt,
   FaMoneyBill,
   FaTrash,
   FaEdit,
@@ -57,20 +57,20 @@ const SingleTuition = () => {
       return;
     }
 
-   
+
     if (user.id !== tuition?.postedBy?._id) {
       toast.error("Only the owner can delete this tuition");
       return;
     }
 
-    
-    const canDelete =  tuition?.paymentStatus === "unpaid";
-    console.log(tuition,'this is the value of can delete')
-    
+
+    const canDelete = tuition?.paymentStatus === "unpaid";
+    console.log(tuition, 'this is the value of can delete')
+
     if (!canDelete) {
       toast.error(
-        tuition?.assignedTutor 
-          ? "Cannot delete tuition that has an assigned tutor" 
+        tuition?.assignedTutor
+          ? "Cannot delete tuition that has an assigned tutor"
           : "Cannot delete tuition that has been paid"
       );
       return;
@@ -91,14 +91,14 @@ const SingleTuition = () => {
 
   const canDelete = () => {
     if (!user || !tuition) return false;
-    
+
 
     const isOwner = user._id === tuition.postedBy?._id;
-    
- 
+
+
     const hasNoAssignedTutor = tuition.assignedTutor === null || tuition.assignedTutor === undefined;
     const isUnpaid = tuition.paymentStatus === "unpaid";
-    
+
     return isOwner && hasNoAssignedTutor && isUnpaid;
   };
 
@@ -163,7 +163,7 @@ const SingleTuition = () => {
 
   return (
     <div className="max-w-6xl mx-auto py-8 px-4 space-y-10">
-    
+
       <div className="space-y-3 w-full">
         <div className="flex justify-between items-start flex-wrap gap-4">
           <div className="flex-1">
@@ -171,13 +171,12 @@ const SingleTuition = () => {
               {tuition.title}
             </h1>
             <div className="flex flex-wrap gap-3 items-center mt-3">
-              <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                tuition.status === 'open' ? 'bg-green-100 text-green-800' :
-                tuition.status === 'assigned' ? 'bg-blue-100 text-blue-800' :
-                tuition.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' :
-                tuition.status === 'completed' ? 'bg-purple-100 text-purple-800' :
-                'bg-gray-100 text-gray-800'
-              }`}>
+              <span className={`px-3 py-1 rounded-full text-xs font-medium ${tuition.status === 'open' ? 'bg-green-100 text-green-800' :
+                  tuition.status === 'assigned' ? 'bg-blue-100 text-blue-800' :
+                    tuition.status === 'in-progress' ? 'bg-yellow-100 text-yellow-800' :
+                      tuition.status === 'completed' ? 'bg-purple-100 text-purple-800' :
+                        'bg-gray-100 text-gray-800'
+                }`}>
                 {tuition.status.toUpperCase()}
               </span>
               <span className="px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
@@ -190,7 +189,7 @@ const SingleTuition = () => {
             </div>
           </div>
 
-  
+
           <div className="flex flex-wrap gap-3">
             {user && tuition.status === "open" && user.role === "teacher" && (
               <button
@@ -201,7 +200,7 @@ const SingleTuition = () => {
               </button>
             )}
 
-         
+
             {canDelete() && (
               <button
                 onClick={handleDelete}
@@ -222,10 +221,10 @@ const SingleTuition = () => {
               </button>
             )}
 
-          
+
             {user && user._id === tuition.postedBy?._id && (
               <Link
-                to={`/edit-tuition/${tuition._id}`}
+                to={`/student/edit-tuition/${tuition._id}`}
                 className="btn-outline flex items-center gap-2"
               >
                 <FaEdit />
@@ -235,13 +234,12 @@ const SingleTuition = () => {
           </div>
         </div>
 
-    
+
         {tuition.adminApprovalStatus && (
-          <div className={`flex items-center gap-2 mt-3 ${
-            tuition.adminApprovalStatus === 'approved' ? 'text-green-600' :
-            tuition.adminApprovalStatus === 'rejected' ? 'text-red-600' :
-            'text-yellow-600'
-          }`}>
+          <div className={`flex items-center gap-2 mt-3 ${tuition.adminApprovalStatus === 'approved' ? 'text-green-600' :
+              tuition.adminApprovalStatus === 'rejected' ? 'text-red-600' :
+                'text-yellow-600'
+            }`}>
             <FiAlertCircle />
             <span className="font-medium">Admin Status: </span>
             <span className="capitalize">{tuition.adminApprovalStatus}</span>
@@ -279,12 +277,12 @@ const SingleTuition = () => {
         <p className="text-text-secondary leading-relaxed text-lg">{tuition.description}</p>
       </div>
 
- 
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    
+
         <div className="card p-6">
           <div className="flex items-center gap-3 mb-3 text-text-secondary">
-            <FaMoneyBill className="text-xl" /> 
+            <FaMoneyBill className="text-xl" />
             <span className="font-medium">Total Fee</span>
           </div>
           <p className="text-2xl font-bold text-text-primary">
@@ -293,11 +291,10 @@ const SingleTuition = () => {
           <div className="mt-4 space-y-2">
             <p className="text-sm text-text-secondary">
               Payment Status:{" "}
-              <span className={`font-medium capitalize ${
-                tuition.paymentStatus === 'paid' ? 'text-green-600' :
-                tuition.paymentStatus === 'pending' ? 'text-yellow-600' :
-                'text-red-600'
-              }`}>
+              <span className={`font-medium capitalize ${tuition.paymentStatus === 'paid' ? 'text-green-600' :
+                  tuition.paymentStatus === 'pending' ? 'text-yellow-600' :
+                    'text-red-600'
+                }`}>
                 {tuition.paymentStatus}
               </span>
             </p>
@@ -312,7 +309,7 @@ const SingleTuition = () => {
 
         <div className="card p-6">
           <div className="flex items-center gap-3 mb-3 text-text-secondary">
-            <FaMapMarkerAlt className="text-xl" /> 
+            <FaMapMarkerAlt className="text-xl" />
             <span className="font-medium">Location</span>
           </div>
           <div className="space-y-2">
@@ -386,8 +383,8 @@ const SingleTuition = () => {
         <h2 className="font-semibold text-text-primary text-xl mb-4">Subjects</h2>
         <div className="flex flex-wrap gap-3">
           {tuition.subjects.map((subject, index) => (
-            <span 
-              key={index} 
+            <span
+              key={index}
               className="px-4 py-2 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 font-medium"
             >
               {subject}
@@ -448,7 +445,7 @@ const SingleTuition = () => {
         </div>
       )}
 
-     
+
       {recommendedTuitions?.data?.length > 0 && (
         <div className="mt-12">
           <h2 className="text-2xl font-bold text-text-primary mb-6">

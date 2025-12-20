@@ -57,6 +57,7 @@ import RevenueHistory from "./pages/teacher/RevenueHistory";
 import UserManagement from "./pages/admin/UserManagement";
 import TuitionManagement from "./pages/admin/TuitionManagement";
 import ReportsAnalytics from "./pages/admin/ReportsAnalytics";
+import EditTuition from "./pages/student/EditTuition";
 
 
 
@@ -147,14 +148,15 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          // Default route when /student is accessed
+          
           { index: true, element: <StudentDashboard /> },
 
-          // Other nested routes
+          
           { path: "my-tutions", element: <MyTutions /> },
           { path: "post-tuition", element: <PostTution /> },
           { path: "applied-tutors", element: <AppliedTutors /> },
           { path: "payments", element: <Payments /> },
+          { path: "edit-tuition/:id", element: <EditTuition/> },
         ],
       },
 

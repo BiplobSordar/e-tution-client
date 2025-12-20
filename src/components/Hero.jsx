@@ -1,6 +1,6 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimate } from "framer-motion";
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 const slides = [
   {
     title: "Find The Best Tutors & Tuitions",
@@ -26,6 +26,7 @@ const slides = [
 ];
 
 const Hero = () => {
+  const navigate= useNavigate()
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ const Hero = () => {
 
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
               <motion.button
+               onClick={()=>{navigate('/tuitions')}}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-primary w-full sm:w-auto"
@@ -69,6 +71,7 @@ const Hero = () => {
               </motion.button>
 
               <motion.button
+              onClick={()=>{navigate('/tutors')}}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="btn-secondary w-full sm:w-auto"
