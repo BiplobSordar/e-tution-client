@@ -151,7 +151,7 @@ const FeaturedTuitions = () => {
                     </p>
                     <p className="flex items-center gap-2">
                       <LuMapPin size={16} /> 
-                      {tuition.location?.city || tuition.location || "Location not specified"}
+                      {/* {tuition.location?.city || tuition.location || "Location not specified"} */}
                     </p>
                     <p className="flex items-center gap-2 font-semibold text-[var(--text-primary)]">
                       <LuWallet size={16} /> 

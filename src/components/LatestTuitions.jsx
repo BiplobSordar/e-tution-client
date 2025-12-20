@@ -72,7 +72,7 @@ const LatestTuitions = () => {
       </section>
     );
   }
-  console.log(tuitionsData)
+
 
   const formatTimeAgo = (dateString) => {
     if (!dateString) return "Recently";
