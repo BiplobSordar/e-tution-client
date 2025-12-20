@@ -72,6 +72,7 @@ const LatestTuitions = () => {
       </section>
     );
   }
+  console.log(tuitionsData)
 
   const formatTimeAgo = (dateString) => {
     if (!dateString) return "Recently";
@@ -152,6 +153,7 @@ const LatestTuitions = () => {
             ))
           ) : (
             latestTuitions.map((tuition) => (
+
               <SwiperSlide key={tuition._id}>
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
@@ -173,9 +175,7 @@ const LatestTuitions = () => {
                     <p className="flex items-center gap-2">
                       <LuBookOpen size={15} /> {tuition.subjects?.join(", ") || tuition.subject || "General"}
                     </p>
-                    <p className="flex items-center gap-2">
-                      <LuMapPin size={15} /> {tuition.location?.city  || "Location not specified"}
-                    </p>
+                   
                     <p className="flex items-center gap-2 font-semibold text-[var(--text-primary)]">
                       <LuWallet size={15} /> ৳ {tuition.totalFee ||  "Negotiable"}
                     </p>

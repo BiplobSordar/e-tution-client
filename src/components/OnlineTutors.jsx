@@ -105,7 +105,7 @@ const OnlineTutors = () => {
                     )}
                   </div>
                   <h3 className="font-semibold text-[var(--text-primary)]">
-                    {tutor.name || `${tutor.firstName} ${tutor.lastName || ''}`.trim()}
+                    {tutor.name}
                   </h3>
                   <p className="text-[var(--text-secondary)]">
                     {tutor.specialization || tutor.subject || tutor.expertise?.[0] || "Tutor"}
