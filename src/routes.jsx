@@ -1,14 +1,11 @@
 import React from "react";
 import { createBrowserRouter, Navigate, Outlet } from "react-router-dom";
-import { useSelector } from "react-redux";
-
 
 import MainLayout from "./Layouts/MainLayout";
 import TeacherLayout from "./Layouts/TeacherLayout";
 import AdminLayout from "./Layouts/AdminLayout";
 import StudentLayout from "./Layouts/StudentLayout";
 import GuardianLayout from "./Layouts/GuardianLayout";
-
 
 import Home from "./pages/Home";
 import Tuitions from "./pages/Tuitions";
@@ -18,26 +15,10 @@ import Contact from "./pages/Contact";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import NotFound from "./pages/NotFound";
-
-
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
-import T1 from "./pages/teacher/T1";
-import T2 from "./pages/teacher/T2";
-
-
 import AdminDashboard from "./pages/admin/AdminDashboard";
-
-
-
-
 import StudentDashboard from "./pages/student/StudendDashboard";
-import S1 from "./pages/student/S1";
-import S2 from "./pages/student/S2";
-
-
 import GuardianDashboard from "./pages/guardian/GuradianDashboard";
-import G1 from "./pages/guardian/G1";
-import G2 from "./pages/guardian/G2";
 import Unauthorized from "./pages/Unauthorized";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -59,31 +40,23 @@ import TuitionManagement from "./pages/admin/TuitionManagement";
 import ReportsAnalytics from "./pages/admin/ReportsAnalytics";
 import EditTuition from "./pages/student/EditTuition";
 
-
-
-
-const ProtectedRoute = ({ allowedRoles }) => {
+// Create wrapper components that will use hooks when rendered
+const ProtectedRouteWrapper = ({ children, allowedRoles }) => {
+  const { useSelector } = require("react-redux");
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  if (allowedRoles && !allowedRoles.includes(user?.role)) {
-    return <Navigate to="/unauthorized" replace />;
-  }
-
-  return <Outlet />;
-};
-
-
-
-const PublicRoute = ({ children }) => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
-  if (isAuthenticated) return <Navigate to={`/${user?.role}`} replace />;
+  
+  if (!isAuthenticated) return <Navigate to="/login" replace />;
+  if (!allowedRoles.includes(user?.role)) return <Navigate to="/unauthorized" replace />;
   return children;
 };
 
+const PublicRouteWrapper = ({ children }) => {
+  const { useSelector } = require("react-redux");
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  
+  if (isAuthenticated) return <Navigate to={`/${user?.role}`} replace />;
+  return children;
+};
 
 const RootLayout = () => <MainLayout><Outlet /></MainLayout>;
 
@@ -92,94 +65,118 @@ export const router = createBrowserRouter([
     path: "/",
     element: <RootLayout />,
     children: [
-
       { index: true, element: <Home /> },
       { path: "tuitions", element: <Tuitions /> },
       { path: "tutors", element: <Tutors /> },
       { path: "about", element: <About /> },
       { path: "contact", element: <Contact /> },
-      { path: "login", element: <PublicRoute><Login /></PublicRoute> },
-      { path: "register", element: <PublicRoute><Register /></PublicRoute> },
+      { 
+        path: "login", 
+        element: (
+          <PublicRouteWrapper>
+            <Login />
+          </PublicRouteWrapper>
+        ) 
+      },
+      { 
+        path: "register", 
+        element: (
+          <PublicRouteWrapper>
+            <Register />
+          </PublicRouteWrapper>
+        ) 
+      },
       { path: "*", element: <NotFound /> },
       { path: "unauthorized", element: <Unauthorized /> },
       { path: "forgot-password", element: <ForgotPassword /> },
       { path: "reset-password", element: <ResetPassword /> },
       { path: "tutions/:id", element: <SingleTuition /> },
       { path: "public/:userId", element: <PublicProfilePage /> },
-      { path: "profile", element: <ProtectedRoute allowedRoles={['teacher', 'student', 'admin', 'guardian']}><ProfilePage /></ProtectedRoute> },
-      { path: "apply-tution/:tuitionId", element: <ProtectedRoute allowedRoles={['teacher']}><TuitionApplicationPage /></ProtectedRoute> },
-      { path: "payment-success", element: <ProtectedRoute allowedRoles={['student']}><PaymentSuccess /></ProtectedRoute> },
-      { path: "payment-cancle", element: <ProtectedRoute allowedRoles={['student']}><PaymentCancel /></ProtectedRoute> },
-
-
+      { 
+        path: "profile", 
+        element: (
+          <ProtectedRouteWrapper allowedRoles={['teacher', 'student', 'admin', 'guardian']}>
+            <ProfilePage />
+          </ProtectedRouteWrapper>
+        ) 
+      },
+      { 
+        path: "apply-tution/:tuitionId", 
+        element: (
+          <ProtectedRouteWrapper allowedRoles={['teacher']}>
+            <TuitionApplicationPage />
+          </ProtectedRouteWrapper>
+        ) 
+      },
+      { 
+        path: "payment-success", 
+        element: (
+          <ProtectedRouteWrapper allowedRoles={['student']}>
+            <PaymentSuccess />
+          </ProtectedRouteWrapper>
+        ) 
+      },
+      { 
+        path: "payment-cancle", 
+        element: (
+          <ProtectedRouteWrapper allowedRoles={['student']}>
+            <PaymentCancel />
+          </ProtectedRouteWrapper>
+        ) 
+      },
       {
         path: "teacher/*",
         element: (
-          <ProtectedRoute allowedRoles={["teacher"]}>
+          <ProtectedRouteWrapper allowedRoles={["teacher"]}>
             <TeacherLayout />
-          </ProtectedRoute>
+          </ProtectedRouteWrapper>
         ),
         children: [
           { index: true, element: <TeacherDashboard /> },
           { path: 'my-applications', element: <MyApplications /> },
           { path: 'my-tuitions', element: <OngoingTuitions /> },
           { path: 'payment-history', element: <RevenueHistory /> },
-
         ],
       },
-
-
       {
         path: "admin/*",
         element: (
-          <ProtectedRoute allowedRoles={["admin"]}>
+          <ProtectedRouteWrapper allowedRoles={["admin"]}>
             <AdminLayout />
-          </ProtectedRoute>
+          </ProtectedRouteWrapper>
         ),
         children: [
           { index: true, element: <AdminDashboard /> },
           { path: "users", element: <UserManagement /> },
           { path: "tuitions", element: <TuitionManagement /> },
-          {
-            path: "reports",
-            element: <ReportsAnalytics />
-          }
+          { path: "reports", element: <ReportsAnalytics /> }
         ],
       },
-
-
       {
         path: "student/*",
         element: (
-          <ProtectedRoute allowedRoles={["student"]}>
+          <ProtectedRouteWrapper allowedRoles={["student"]}>
             <StudentLayout />
-          </ProtectedRoute>
+          </ProtectedRouteWrapper>
         ),
         children: [
-
           { index: true, element: <StudentDashboard /> },
-
-
           { path: "my-tutions", element: <MyTutions /> },
           { path: "post-tuition", element: <PostTution /> },
           { path: "applied-tutors", element: <AppliedTutors /> },
           { path: "payments", element: <Payments /> },
-          { path: "edit-tuition/:id", element: <EditTuition /> },
+          { path: "edit-tuition/:id", element: <EditTuition/> },
         ],
       },
-
-
       {
         path: "guardian/*",
         element: (
-          <ProtectedRoute allowedRoles={["guardian"]}>
+          <ProtectedRouteWrapper allowedRoles={["guardian"]}>
             <GuardianLayout />
-          </ProtectedRoute>
+          </ProtectedRouteWrapper>
         ),
         children: [
           { index: true, element: <GuardianDashboard /> },
-          { path: "g1", element: <G1 /> },
-          { path: "g2", element: <G2 /> },
         ],
       },
     ],
