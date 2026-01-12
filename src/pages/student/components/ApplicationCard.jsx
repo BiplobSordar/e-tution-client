@@ -1,7 +1,8 @@
-// src/pages/applied-tutors/components/ApplicationCard.jsx
-import React from "react";
+
 import StatusBadge from "../components/StatusBadge";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import toast from "react-hot-toast";
+
 import { useCreateCheckoutSessionMutation, useRejectTutorMutation } from "../../../features/tution/tutionApi";
 import { useNavigate } from 'react-router-dom';
 import { useEffect } from "react";
@@ -31,6 +32,49 @@ refetch,
       day: "numeric",
     });
   };
+const handleRejectTutor = async (e, tuitionId, tutorId) => {
+  e.stopPropagation();
+
+  try {
+    await rejectTutor({
+      tuitionId,
+      tutorId,
+    }).unwrap();
+
+    toast.success("Tutor rejected successfully");
+    refetch();
+  } catch (error) {
+    const message =
+      error?.data?.message ||
+      error?.error ||
+      "Failed to reject tutor";
+
+    toast.error(message);
+    console.error("Reject tutor failed:", error);
+  }
+};
+
+const handleAcceptTutor = async (e, tuitionId, tutorId) => {
+  e.stopPropagation();
+
+  try {
+    await createCheckoutSession({
+      tuitionId,
+      tutorId,
+    }).unwrap();
+
+    toast.success("Tutor accepted successfully");
+    refetch();
+  } catch (error) {
+    const message =
+      error?.data?.message ||
+      error?.error ||
+      "Failed to accept tutor";
+
+    toast.error(message);
+    console.error("Accept tutor failed:", error);
+  }
+};
 
   const isPending = application.status === "pending";
  
@@ -86,14 +130,14 @@ refetch,
 
 
           <div className="flex justify-between text-sm text-text-secondary">
-            <span>₹{application.proposedRate}/month</span>
+            <span>৳{application.proposedRate}/month</span>
             <span>{formatDate(application.appliedAt)}</span>
           </div>
 
 
           {application.message && (
             <p className="mt-2 text-sm text-text-secondary line-clamp-2">
-              “{application.message}”
+              {application.message}
             </p>
           )}
         </div>
@@ -109,14 +153,9 @@ refetch,
      
           <button
             disabled={!isPending}
-            onClick={(e) => {
-              e.stopPropagation();
-              createCheckoutSession({
-                tuitionId,
-                tutorId: application?.tutor?._id
-              }).unwrap()
-              refetch()
-            }}
+             onClick={(e) =>
+    handleAcceptTutor(e, tuitionId, application?.tutor?._id)
+  }
             title="Accept Application"
             style={{
               backgroundColor: isPending ? "var(--success)" : "var(--hover-bg)",
@@ -131,13 +170,9 @@ refetch,
         
           <button
             disabled={!isPending}
-            onClick={(e) => {
-              e.stopPropagation();
-             rejectTutor({
-                tuitionId,
-                tutorId: application?.tutor?._id
-              })
-            }}
+             onClick={(e) =>
+    handleRejectTutor(e, tuitionId, application?.tutor?._id)
+  }
             title="Reject Application"
             style={{
               backgroundColor: isPending ? "var(--error)" : "var(--hover-bg)",

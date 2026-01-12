@@ -20,7 +20,25 @@ const StudentDashboard = () => {
       ),
     totalGuardians: studentData?.guardians?.length || 0
   };
-  if (isLoading) return null;
+   if (isLoading) {
+    return (
+      <div className="p-4 md:p-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+          {[1,2,3,4].map(i => (
+            <div key={i} className="dashboard-card skeleton h-32"></div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div className="lg:col-span-2">
+            <div className="dashboard-card skeleton h-64"></div>
+          </div>
+          <div>
+            <div className="dashboard-card skeleton h-64"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
 
