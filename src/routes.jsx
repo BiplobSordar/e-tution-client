@@ -65,7 +65,7 @@ import EditTuition from "./pages/student/EditTuition";
 
 
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+const ProtectedRoute = ({  allowedRoles,children }) => {
   const { isAuthenticated, user, loading } = useSelector(
     (state) => state.auth
   );
