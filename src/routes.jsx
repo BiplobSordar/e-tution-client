@@ -62,13 +62,39 @@ import EditTuition from "./pages/student/EditTuition";
 
 
 
+// const ProtectedRoute = ({ children, allowedRoles }) => {
+//   const { isAuthenticated, user } = useSelector((state) => state.auth);
+//   if (!isAuthenticated) return <Navigate to="/login" replace />;
+//   if (!allowedRoles.includes(user?.role)) return <Navigate to="/unauthorized" replace />;
+//   return children;
+// };
+
+
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { isAuthenticated, user } = useSelector((state) => state.auth);
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (!allowedRoles.includes(user?.role)) return <Navigate to="/unauthorized" replace />;
+  const { isAuthenticated, user, loading } = useSelector(
+    (state) => state.auth
+  );
+
+
+  if (loading) return null; 
+
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+
+  if (!user) {
+    return null;
+  }
+
+ 
+  if (!allowedRoles.includes(user.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
   return children;
 };
-
 
 const PublicRoute = ({ children }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
