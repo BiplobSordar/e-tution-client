@@ -57,7 +57,7 @@ const TeacherCard = ({ teacher }) => {
             <FaClock /> {experienceYears} yrs exp
           </div>
           <div className="flex items-center gap-1">
-            ${hourlyRate} / hr
+            BDT {hourlyRate} / hr
           </div>
         </div>
 

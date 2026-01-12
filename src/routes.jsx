@@ -62,12 +62,20 @@ import EditTuition from "./pages/student/EditTuition";
 
 
 
-const ProtectedRoute = ({ children, allowedRoles }) => {
+const ProtectedRoute = ({ allowedRoles }) => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
-  if (!isAuthenticated) return <Navigate to="/login" replace />;
-  if (!allowedRoles.includes(user?.role)) return <Navigate to="/unauthorized" replace />;
-  return children;
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  if (allowedRoles && !allowedRoles.includes(user?.role)) {
+    return <Navigate to="/unauthorized" replace />;
+  }
+
+  return <Outlet />;
 };
+
 
 
 const PublicRoute = ({ children }) => {
@@ -148,15 +156,15 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         children: [
-          
+
           { index: true, element: <StudentDashboard /> },
 
-          
+
           { path: "my-tutions", element: <MyTutions /> },
           { path: "post-tuition", element: <PostTution /> },
           { path: "applied-tutors", element: <AppliedTutors /> },
           { path: "payments", element: <Payments /> },
-          { path: "edit-tuition/:id", element: <EditTuition/> },
+          { path: "edit-tuition/:id", element: <EditTuition /> },
         ],
       },
 

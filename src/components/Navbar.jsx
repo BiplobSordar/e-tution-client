@@ -234,7 +234,7 @@ const Navbar = () => {
                 Profile
               </Link>
               <Link
-                to="/logout"
+                to="/"
                 onClick={async () => {
                   await handleLogout();
                   setMobileOpen(false);
