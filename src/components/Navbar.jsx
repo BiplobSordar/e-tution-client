@@ -61,6 +61,7 @@ const Navbar = () => {
 
 
       dispatch(clearUser());
+      window.location.replace("/login");
     } catch (err) {
       console.error("Logout failed:", err);
     }
@@ -252,7 +253,7 @@ const Navbar = () => {
       {mobileOpen && (
         <div
           onClick={toggleMobileMenu}
-         className="fixed inset-0 bg-black/60 z-40"
+          className="fixed inset-0 bg-black/60 z-40"
         ></div>
       )}
     </nav>
