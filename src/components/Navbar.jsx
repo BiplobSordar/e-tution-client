@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { auth } from "../config/firebase";
 import { clearUser } from "../features/auth/authSlice";
-import { useLogoutUserMutation } from "../features/auth/authApi";
+import { authApi, useLogoutUserMutation } from "../features/auth/authApi";
 
 
 const Navbar = () => {
@@ -61,6 +61,7 @@ const Navbar = () => {
 
 
       dispatch(clearUser());
+      dispatch(authApi.util.resetApiState());
       window.location.replace("/login");
     } catch (err) {
       console.error("Logout failed:", err);
