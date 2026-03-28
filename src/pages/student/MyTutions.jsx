@@ -100,7 +100,7 @@ const MyTuitionsPage = () => {
               </p>
             </div>
             <Link
-              to="/tuitions/create"
+              to="/student/post-tuition"
               className="btn-primary px-6 py-3 rounded-lg flex items-center gap-2"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -226,6 +226,7 @@ const MyTuitionsPage = () => {
                 hasRealData={hasRealData}
               />
             ))}
+           
           </div>
 
         )}

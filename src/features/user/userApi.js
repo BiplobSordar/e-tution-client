@@ -6,7 +6,7 @@ export const userApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ["User"],
   endpoints: (builder) => ({
-  
+
     getMyProfile: builder.query({
       query: (id) => `/api/users`,
       providesTags: (result, error, id) => [{ type: "User", id }],
@@ -14,7 +14,7 @@ export const userApi = createApi({
 
 
     updateMyProfile: builder.mutation({
-      query: ( data ) => ({
+      query: (data) => ({
         url: `/api/users`,
         method: "PUT",
         body: data,
@@ -22,6 +22,14 @@ export const userApi = createApi({
       invalidatesTags: (result, error,) => [
         { type: "User" },
       ],
+    }),
+    addGuardian: builder.mutation({
+      query: (data) => ({
+        url: `/api/student/guardian-request`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: () => [{ type: "User" }],
     }),
     uploadAvatar: builder.mutation({
       query: (avatarBase64) => ({
@@ -38,9 +46,10 @@ export const userApi = createApi({
 });
 
 export const {
- 
- useUpdateMyProfileMutation,
+
+  useUpdateMyProfileMutation,
   useGetMyProfileQuery,
   useUploadAvatarMutation,
-  useGetUserProfileByIdQuery
+  useGetUserProfileByIdQuery,
+  useAddGuardianMutation
 } = userApi;

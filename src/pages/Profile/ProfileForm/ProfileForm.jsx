@@ -113,6 +113,8 @@ const ProfileForm = ({ user, onSave, onCancel, mode = 'edit', refetchUser }) => 
     reader.readAsDataURL(file);
   };
 
+  console.log(isSubmitting,'this is the condiation when submisit')
+
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
       <FormHeader

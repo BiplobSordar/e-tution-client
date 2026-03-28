@@ -13,7 +13,7 @@ const PaymentSuccess = () => {
           Your payment has been received successfully. The tutor will be assigned shortly, and your tuition status has been updated.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row justify-center">
-          <Link to="/my-tuitions" className="btn-primary">
+          <Link to="/student/my-tutions" className="btn-primary">
             Go to My Tuitions
           </Link>
           <Link to="/" className="btn-secondary">

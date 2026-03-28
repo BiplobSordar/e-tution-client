@@ -21,7 +21,7 @@ const ProfilePage = () => {
   const { data: user, isLoading, isError, error, refetch: refetchProfile } = useGetMyProfileQuery();
   const [updateMyProfile, { isLoading: loading }] = useUpdateMyProfileMutation()
 
-  console.log(user, 'thsi is the user form backend')
+
   useEffect(() => {
     if (user) {
       const isProfileComplete = checkProfileCompleteness(user);

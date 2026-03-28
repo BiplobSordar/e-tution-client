@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { FaMapMarkerAlt, FaBook, FaMoneyBill, FaClock } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { useSelector } from "react-redux";
 const TuitionCard = ({ tution }) => {
   const [showFull, setShowFull] = useState(false);
 
+
+  const { user, isAuthenticated, accessToken, loading } = useSelector(
+    (state) => state.auth
+  );
 
   const title = tution?.title || "";
   const isTitleLong = title.length > 40;
@@ -107,25 +111,32 @@ const TuitionCard = ({ tution }) => {
 
    
       <div className="mt-4">
-        {tution.alreadyApplied ? (
-          <Link to={`/tutions/${tution._id}`}>
-          <button
-            className="
-              w-full py-2 rounded-lg 
-              bg-hover-bg text-text-secondary 
-              border border-border cursor-not-allowed
-            "
-          >
-            Already Applied
-          </button>
-          </Link>
-        ) : (
-           <Link to={`/tutions/${tution._id}`}>
-          <button className="btn-primary w-full">
-            Apply Now
-          </button>
-          </Link>
-        )}
+       {user?.role === "student" ? (
+  <Link to={`/tutions/${tution._id}`}>
+    <button className="btn-outline w-full">
+      View
+    </button>
+  </Link>
+) : tution.alreadyApplied ? (
+  <Link to={`/tutions/${tution._id}`}>
+    <button
+      className="
+        w-full py-2 rounded-lg 
+        bg-hover-bg text-text-secondary 
+        border border-border cursor-not-allowed
+      "
+      disabled
+    >
+      Already Applied
+    </button>
+  </Link>
+) : (
+  <Link to={`/tutions/${tution._id}`}>
+    <button className="btn-primary w-full">
+      Apply Now
+    </button>
+  </Link>
+)}
       </div>
     </div>
   );

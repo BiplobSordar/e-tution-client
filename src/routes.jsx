@@ -21,8 +21,7 @@ import NotFound from "./pages/NotFound";
 
 
 import TeacherDashboard from "./pages/teacher/TeacherDashboard";
-import T1 from "./pages/teacher/T1";
-import T2 from "./pages/teacher/T2";
+
 
 
 import AdminDashboard from "./pages/admin/AdminDashboard";
@@ -31,13 +30,11 @@ import AdminDashboard from "./pages/admin/AdminDashboard";
 
 
 import StudentDashboard from "./pages/student/StudendDashboard";
-import S1 from "./pages/student/S1";
-import S2 from "./pages/student/S2";
 
 
 import GuardianDashboard from "./pages/guardian/GuradianDashboard";
-import G1 from "./pages/guardian/G1";
-import G2 from "./pages/guardian/G2";
+
+
 import Unauthorized from "./pages/Unauthorized";
 import ForgotPassword from "./pages/ForgotPassword";
 import ResetPassword from "./pages/ResetPassword";
@@ -58,6 +55,10 @@ import UserManagement from "./pages/admin/UserManagement";
 import TuitionManagement from "./pages/admin/TuitionManagement";
 import ReportsAnalytics from "./pages/admin/ReportsAnalytics";
 import EditTuition from "./pages/student/EditTuition";
+import MyStudents from "./pages/guardian/MyStudents";
+import StudentProgress from "./pages/guardian/StudentProgress";
+import GuardianRequest from "./pages/guardian/Request";
+import AddStudent from "./pages/guardian/AddStudents";
 
 
 
@@ -194,8 +195,10 @@ export const router = createBrowserRouter([
         ),
         children: [
           { index: true, element: <GuardianDashboard /> },
-          { path: "g1", element: <G1 /> },
-          { path: "g2", element: <G2 /> },
+          { path: "students", element: <MyStudents/> },
+          { path: "progress", element: <StudentProgress/> },
+          { path: "requests", element: <GuardianRequest/> },
+          { path: "add-students", element: <AddStudent/> },
         ],
       },
     ],

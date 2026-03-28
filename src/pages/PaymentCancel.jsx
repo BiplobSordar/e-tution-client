@@ -13,7 +13,7 @@ const PaymentCancel = () => {
           Your payment was not completed. You can try again or choose another tuition.
         </p>
         <div className="flex flex-col gap-3 sm:flex-row justify-center">
-          <Link to="/my-tuitions" className="btn-primary">
+          <Link to="/student/my-tutions" className="btn-primary">
             Retry Payment
           </Link>
           <Link to="/" className="btn-secondary">

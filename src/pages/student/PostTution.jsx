@@ -132,7 +132,7 @@ export default function PostTuition() {
     try {
       await createTuition(data).unwrap();
       toast.success("Tuition submitted successfully!");
-      navigate("/student/my-tuitions");
+      navigate("/student/my-tutions");
     } catch (error) {
       console.error("Error submitting tuition:", error);
       toast.error(error?.data?.message || "Failed to submit tuition!");
@@ -141,7 +141,7 @@ export default function PostTuition() {
 
   return (
     <div className={`${theme} min-h-screen p-6 bg-bg`}>
-      <div className="max-w-5xl mx-auto card">
+      <div className="w-full rounded-2xl card">
         <div className="flex-between mb-6">
           <h2 className="text-2xl font-bold">Post Tuition</h2>
 

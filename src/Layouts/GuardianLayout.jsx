@@ -1,21 +1,171 @@
-// src/Layouts/GuardianLayout.jsx
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+
+
+
+
+import React, { useState, useEffect } from "react";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
+import { useSelector } from "react-redux";
+import {
+  LuLayoutDashboard,
+  LuUsers,
+  LuEye,
+  LuUserPlus,
+  LuSettings,
+  LuMenu,
+  LuX,
+} from "react-icons/lu";
+
+const sidebarWidth = "280px";
 
 const GuardianLayout = () => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const location = useLocation();
+  const { user } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+const navLinks = [
+  { path: "/guardian", label: "Dashboard", icon: <LuLayoutDashboard /> },
+  { path: "/guardian/students", label: "My Students", icon: <LuUsers /> },
+  { path: "/guardian/add-students", label: "Add Students", icon: <LuUserPlus /> }, // distinct icon
+  { path: "/guardian/progress", label: "View Progress", icon: <LuEye /> },
+  { path: "/guardian/requests", label: "Requests", icon: <LuSettings /> },
+];
+  useEffect(() => {
+    if (isMobile) setSidebarOpen(false);
+  }, [location.pathname, isMobile]);
+
   return (
-    <div className="flex min-h-screen">
-      <aside className="w-64 p-4 border-r">
-        <h2>Guardian Panel</h2>
-        <ul>
-          <li><NavLink to="/guardian">Dashboard</NavLink></li>
-          <li><NavLink to="/guardian/g1">G1</NavLink></li>
-          <li><NavLink to="/guardian/g2">G2</NavLink></li>
-        </ul>
+    <div className="min-h-screen flex bg-[var(--bg)] text-[var(--text-primary)] overflow-x-hidden">
+
+      {/* Desktop Sidebar */}
+      <aside
+        className="hidden md:flex fixed left-0 top-0 h-screen flex-col border-r border-[var(--border)] bg-[var(--card-bg)]"
+        style={{ width: sidebarWidth }}
+      >
+        <div className="p-6 border-b border-[var(--border)]">
+          <h2 className="text-xl font-bold">Guardian Dashboard</h2>
+        </div>
+
+        <nav className="flex-1 p-4 overflow-y-auto">
+          <ul className="space-y-2">
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <NavLink
+                  to={link.path}
+                  className={({ isActive }) =>
+                    `flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition ${
+                      isActive
+                        ? "bg-[var(--primary)] text-white shadow"
+                        : "hover:bg-[var(--hover-bg)]"
+                    }`
+                  }
+                >
+                  <span className="text-lg">{link.icon}</span>
+                  {link.label}
+                </NavLink>
+              </li>
+            ))}
+          </ul>
+        </nav>
+
+        {/* Profile */}
+        <div className="p-4 border-t border-[var(--border)]">
+          <div className="flex items-center gap-3 bg-[var(--bg)] p-3 rounded-lg">
+            <div className="w-10 h-10 rounded-full bg-[var(--primary)] text-white flex items-center justify-center font-bold">
+              {user?.name?.charAt(0) || "G"}
+            </div>
+            <div>
+              <p className="font-medium">{user?.name}</p>
+              <p className="text-xs text-[var(--text-secondary)]">
+                {user?.role}
+              </p>
+            </div>
+          </div>
+        </div>
       </aside>
-      <main className="flex-1 p-4">
-        <Outlet />
-      </main>
+
+      {/* Mobile Sidebar */}
+      <AnimatePresence>
+        {sidebarOpen && isMobile && (
+          <>
+            <motion.div
+              className="fixed inset-0 bg-black/40 z-40"
+              onClick={() => setSidebarOpen(false)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            />
+
+            <motion.aside
+              className="fixed left-0 top-0 h-screen w-[85%] bg-[var(--card-bg)] z-50 flex flex-col border-r border-[var(--border)]"
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+            >
+              <div className="p-6 border-b border-[var(--border)] flex justify-between">
+                <h2 className="text-lg font-bold">Guardian Dashboard</h2>
+                <button onClick={() => setSidebarOpen(false)}>
+                  <LuX className="text-2xl" />
+                </button>
+              </div>
+
+              <nav className="flex-1 p-4">
+                <ul className="space-y-2">
+                  {navLinks.map((link) => (
+                    <li key={link.path}>
+                      <NavLink
+                        to={link.path}
+                        onClick={() => setSidebarOpen(false)}
+                        className={({ isActive }) =>
+                          `flex items-center gap-3 px-4 py-3 rounded-lg ${
+                            isActive
+                              ? "bg-[var(--primary)] text-white"
+                              : "hover:bg-[var(--hover-bg)]"
+                          }`
+                        }
+                      >
+                        {link.icon}
+                        {link.label}
+                      </NavLink>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* Main Area */}
+      <div
+        className="flex-1 flex flex-col min-w-0"
+        style={{ marginLeft: !isMobile ? sidebarWidth : 0 }}
+      >
+        {/* Header */}
+        <header className="sticky top-0 z-20 flex items-center gap-4 p-4 bg-[var(--bg)] border-b border-[var(--border)]">
+          <button className="md:hidden" onClick={() => setSidebarOpen(true)}>
+            <LuMenu className="text-2xl" />
+          </button>
+
+          <h1 className="font-semibold text-lg">
+            {navLinks.find((l) => l.path === location.pathname)?.label ||
+              "Dashboard"}
+          </h1>
+        </header>
+
+        {/* Page Content */}
+        <main className="flex-1 p-6 min-w-0 overflow-x-auto">
+          <Outlet />
+        </main>
+      </div>
     </div>
   );
 };

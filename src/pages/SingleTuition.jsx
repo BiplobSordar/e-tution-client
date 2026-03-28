@@ -65,7 +65,7 @@ const SingleTuition = () => {
 
 
     const canDelete = tuition?.paymentStatus === "unpaid";
-    console.log(tuition, 'this is the value of can delete')
+   
 
     if (!canDelete) {
       toast.error(
@@ -83,7 +83,7 @@ const SingleTuition = () => {
     try {
       await deleteTuition(id).unwrap();
       toast.success("Tuition deleted successfully");
-      navigate("/tuitions");
+      navigate("/student/my-tutions");
     } catch (error) {
       toast.error(error?.data?.message || "Failed to delete tuition");
     }
